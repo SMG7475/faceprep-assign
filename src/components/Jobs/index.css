@@ -1,0 +1,8 @@
+.product-sections {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  background-color: black;
+  background-size: cover;
+  padding: 30px;
+}

@@ -10,6 +10,21 @@
   width: 100vw;
   height: 87vh;
 }
+.contact-image {
+  border-radius: 100%;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px;
+  margin: 10px;
+}
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .home-content {
   display: flex;
   flex-direction: column;

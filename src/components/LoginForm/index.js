@@ -20,35 +20,33 @@ class LoginForm extends Component {
     this.setState({password: event.target.value})
   }
 
-  onSubmitSuccess = jwtToken => {
+  onSubmitSuccess = () => {
     const {history} = this.props
 
-    Cookies.set('jwt_token', jwtToken, {
+    Cookies.set('jwt_token', 'yes', {
       expires: 30,
       path: '/',
     })
     history.replace('/')
   }
 
-  onSubmitFailure = errorMsg => {
-    this.setState({showSubmitError: true, errorMsg})
+  onSubmitFailure = () => {
+    const {username, password} = this.state
+    if (username !== '' && password !== '') {
+      this.setState({errorMsg: 'Enter Valid Credentials'})
+    } else if (username === '' && password === '') {
+      this.setState({errorMsg: 'Enter Credentials'})
+    }
+    this.setState({showSubmitError: true})
   }
 
-  submitForm = async event => {
+  submitForm = event => {
     event.preventDefault()
     const {username, password} = this.state
-    const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
+    if (username === 'foo' && password === 'bar') {
+      this.onSubmitSuccess()
     } else {
-      this.onSubmitFailure(data.error_msg)
+      this.onSubmitFailure()
     }
   }
 
@@ -99,7 +97,7 @@ class LoginForm extends Component {
         <div className="login-card">
           <form className="form-container" onSubmit={this.submitForm}>
             <img
-              src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+              src="https://ik.imagekit.io/xca1r344x/facepreplogo.png?updatedAt=1678588686264"
               className="login-website-logo-desktop-image"
               alt="website logo"
             />
